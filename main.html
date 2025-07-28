@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Site</title>
+  <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <button class="tab-button active" data-tab="home">Home</button>
+      <button class="tab-button" data-tab="about">About</button>
+      <button class="tab-button" data-tab="projects">Projects</button>
+      <button class="tab-button" data-tab="contact">Contact</button>
+    </nav>
+
+    <div id="tab-content" class="fade">
+      <h1>Welcome to My Portfolio</h1>
+      <p>This is the home page showcasing my latest work and profile.</p>
+    </div>
+  </div>
+
+  <script>
+    const content = {
+      home: `
+        <h1>Welcome to My Portfolio</h1>
+        <p>This is the home page showcasing my latest work and profile.</p>
+      `,
+      about: `
+        <h1>About Me</h1>
+        <p>I am a passionate developer with experience in HTML, CSS, JavaScript, and React.</p>
+      `,
+      projects: `
+        <h1>My Projects</h1>
+        <ul>
+          <li>Project 1 - React App</li>
+          <li>Project 2 - PHP & MySQL System</li>
+          <li>Project 3 - E-commerce Website</li>
+        </ul>
+      `,
+      contact: `
+        <h1>Contact Me</h1>
+        <p>Email: example@example.com</p>
+        <p>Phone: +250 123 456 789</p>
+      `
+    };
+
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const tab = button.getAttribute('data-tab');
+        const container = document.getElementById('tab-content');
+        container.classList.remove('fade');
+        void container.offsetWidth; // trigger reflow
+        container.innerHTML = content[tab];
+        container.classList.add('fade');
+      });
+    });
+  </script>
+</body>
+</html>
